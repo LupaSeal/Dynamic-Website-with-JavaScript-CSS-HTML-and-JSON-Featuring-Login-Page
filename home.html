@@ -1,0 +1,4786 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMS</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" />
+    <link rel="stylesheet" href="static/css/chat.css">
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="stylesheet" href="static/css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css" />
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    
+
+<style>
+
+/*ChatBot Start*/
+html {
+    scroll-behavior: smooth;
+    font-family: Helvetica, sans-serif, Arial;
+}
+
+body {
+    margin: 0 auto;
+    background-color: white;
+}
+.chat-bar-collapsible {
+    position: fixed;
+    bottom: 0;
+    right: 47px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index:1000;
+}
+
+.collapsible {
+    background-color: #000119;
+    color: white;
+    cursor: pointer;
+    padding: 12px;
+    width: 400px;
+    text-align: left;
+    outline: none;
+    font-size: 21px;
+    border-radius: 10px 10px 0px 0px;
+    border: 3px solid white;
+    border-bottom: none;
+}
+
+.content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f1f1f1;
+}
+
+.full-chat-block {
+    width: 400px;
+    background: white;
+    text-align: center;
+    overflow: auto;
+    scrollbar-width: none;
+    height: max-content;
+    transition: max-height 0.2s ease-out;
+    font-size: 15px;
+}
+
+.outer-container {
+    min-height: 650px;
+    bottom: 0%;
+    position: relative;
+}
+
+.chat-container {
+    max-height: 650px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    scroll-behavior: smooth;
+    hyphens: auto;
+}
+
+.chat-container::-webkit-scrollbar {
+    display: none;
+}
+
+.chat-bar-input-block {
+    display: flex;
+    float: left;
+    box-sizing: border-box;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    background-color: rgb(235, 235, 235);
+    border-radius: 10px 10px 0px 0px;
+    padding: 10px 0px 10px 10px;
+}
+
+.chat-bar-icons {
+    display: flex;
+    justify-content: space-evenly;
+    box-sizing: border-box;
+    width: 25%;
+    float: right;
+    font-size: 20px;
+}
+
+#chat-icon:hover {
+    opacity: .7;
+}
+
+#userInput {
+    width: 75%;
+}
+
+.input-box {
+    float: left;
+    border: none;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
+    color: #000;
+    background-color: white;
+    outline: none
+
+}
+
+.userText {
+    color: white;
+    font-family: Helvetica;
+    font-size: 16px;
+    font-weight: normal;
+    text-align: right;
+    clear: both;
+}
+
+.userText span {
+    line-height: 1.5em;
+    display: inline-block;
+    background: #5ca6fa;
+    padding: 10px;
+    border-radius: 8px;
+    border-bottom-right-radius: 2px;
+    max-width: 80%;
+    margin-right: 10px;
+    animation: floatup .5s forwards
+}
+
+.botText {
+    color: #000;
+    font-family: Helvetica;
+    font-weight: normal;
+    font-size: 16px;
+    text-align: left;
+}
+
+.botText span {
+    line-height: 1.5em;
+    display: inline-block;
+    background: #e0e0e0;
+    padding: 10px;
+    border-radius: 8px;
+    border-bottom-left-radius: 2px;
+    max-width: 80%;
+    margin-left: 10px;
+    animation:floatup 1.5s forwards;
+}
+
+@keyframes floatup {
+    from {
+        transform: translateY(14px);
+        opacity: .0;
+    }
+    to {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .full-chat-block {
+        width: 100%;
+        border-radius: 0px;
+    }
+    .chat-bar-collapsible {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+    }
+    .collapsible {
+        width: 100%;
+        border: 0px;
+        border-top: 3px solid white;
+        border-radius: 0px;
+    }
+}
+
+.navbar{
+text-decoration:none;
+}
+
+.barIcon{
+width: 38%;
+position: relative;
+z-index:1000;
+right:-60%;
+border-radius:100%;
+margin-bottom: -17rem;
+top: -13rem;
+  
+box-shadow:0px -1px 20px #000119;
+}
+
+.iconText{
+position: relative; 
+display: inline-block;
+left:-1%;
+top: 1.5rem;
+
+}
+}
+/*ChatBot End*/
+
+
+/*Modal Start*/
+*, *::after, *::before {
+//  box-sizing: border-box;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 10000;
+  background-color: white;
+  font-size: 1.60rem;
+  width: 501px;
+  max-width: 90%;
+}
+
+.modal.active {
+  transform: translate(-50%, -50%) scale(0.9);
+}
+
+.modal-header {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+
+.modal-header .title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.modal-header .close-button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.modal-body {
+  padding: 10px 15px;
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  transition: 200ms ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .5);
+  pointer-events: none;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.b{
+display:none;
+}
+
+.modal2 {
+  position: fixed;
+  top: 50%;
+  left: 49%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  border: 1px solid black;
+  border-radius: 10px;
+  font-size: 1.60rem;
+  z-index: 1000;
+  background-color: white;
+  width: 500px;
+  max-width: 90%;
+}
+.modal3 {
+  position: fixed;
+  top: 50%;
+  left: 49%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  border: 1px solid black;
+  font-size: 1.60rem;
+  border-radius: 10px;
+  z-index: 10;
+  background-color: white;
+  width: 500px;
+  max-width: 90%;
+}
+
+.aloha{
+width:45px;
+height:45px;
+border-radius:50%;
+object-fit:cover;
+display:flex;
+margin-left: 1rem;
+}
+
+.time{
+    font-size: 16px;
+}
+.avatar{
+width:45px;
+height:45px;
+border-radius:50%;
+object-fit:cover;
+}
+
+.out-msg{
+display:flex;
+justify:content:flex-end;
+align-items:center;
+}
+
+.my-msg{
+display:flex;
+justify-content:flex-end;
+margin:0.75rem;
+padding:0.5rem;
+background-color:#dd;
+border-radius:25px;
+box-shadow: 0 2px 5px rgba (0,0,0,0.4);
+word-break:break-all;
+}
+
+.modal4 {
+  position: fixed;
+  top: 50%;
+  left: 49%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  font-size: 1.60rem;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 1000;
+  background-color: white;
+  width: 500px;
+  max-width: 90%;
+}
+
+.modal5 {
+  position: fixed;
+  top: 50%;
+  left: 49%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  font-size: 1.60rem;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 1000;
+  background-color: white;
+  width: 500px;
+  max-width: 90%;
+}
+
+.modal6 {
+  position: fixed;
+  top: 40%;
+  left: 49%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  font-size: 1.60rem;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 1000;
+  background-color: white;
+  width: 500px;
+  max-width: 90%;
+}
+
+.modal7 {
+  position: fixed;
+  top: 80%;
+  left: 49%;
+  transform: translate(50%, 50%) scale(1);
+  transition: 200ms ease-in-out;
+  font-size: 3rem;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 1000;
+  background-color: white;
+  width: 5000px;
+  max-width: 90%;
+}
+
+.modal8 {
+  position: fixed;
+  top: 80%;
+  left: 49%;
+  transform: translate(50%, 50%) scale(1);
+  transition: 200ms ease-in-out;
+  font-size: 3rem;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 1000;
+  background-color: white;
+  width: 5000px;
+  max-width: 90%;
+}
+
+.modal9 {
+  position: fixed;
+  top: 80%;
+  left: 49%;
+  transform: translate(50%, 50%) scale(1);
+  transition: 200ms ease-in-out;
+  font-size: 3rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  z-index: 1000;
+  background-color:white;
+  width: 5000px;
+  max-width: 90%;
+}
+
+.modal10 {
+  position: fixed;
+  top: 80%;
+  left: 49%;
+  transform: translate(50%, 50%) scale(1);
+  transition: 200ms ease-in-out;
+  font-size: 3rem;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 1000;
+  background-color: white;
+  width: 5000px;
+  max-width: 90%;
+}
+
+.modal11 {
+  position: fixed;
+  top: 80%;
+  left: 49%;
+  transform: translate(50%, 50%) scale(1);
+  transition: 200ms ease-in-out;
+  font-size: 3rem;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 1000;
+  background-color: white;
+  width: 5000px;
+  max-width: 90%;
+}
+
+:root {
+    --primary-color: #F4CE01;
+    --secondary-color: #0F0F0B;
+}
+
+.td{
+font-size: 62.5%;
+    background-color: var(--primary-color);
+    font: bold 2rem 'Open Sans', sans-serif;
+}
+
+.todo {
+    display: flex;
+    width: 50vw;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    gap: 15px;
+  width: 5000px;
+  max-width: 90%;
+}
+
+.todo__title {
+    display: flex;
+    background-color: var(--secondary-color);
+    width: 100%;
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    box-shadow: 1px 1px 5px var(--secondary-color);
+    font-size: 3rem;
+    color: var(--primary-color);
+}
+
+.todo__list {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.todo__item{
+    display: flex;
+    width: 100%;
+    height: 60px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    box-shadow: 1px 1px 5px var(--secondary-color);
+}
+.todo__item > div {
+    width: 80%;
+}
+.todo__item:hover {
+    cursor: pointer;
+    transition: all .5s ease;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+
+.todo__item > input[type='text'] {
+    border: none;
+    width: 80%;
+    font: inherit;
+}
+
+.todo__item > input[type='button'],
+.todo__item > input[type='checkbox'] {
+    width: 30px;
+    height: 30px;
+    font: inherit;
+}
+
+
+.todo__item > input[type='checkbox']:checked  + div {
+    text-decoration:line-through;
+}
+
+.todo__new-item{
+    display: flex;
+    background-color: #fff59d;
+    width: 100%;
+    height: 70px;
+    justify-content: space-evenly;
+    padding: 10px 0;
+    box-shadow: 1px 1px 5px var(--secondary-color);
+    margin: 10px;
+    font: inherit;
+}
+
+.todo__new-item > input{
+    background-color: #fff59d;
+    border: none;
+    width: 80%;
+    outline: none;
+    font: inherit;
+}
+
+.todo__new-item > input::placeholder {
+    font-style: italic;
+    font-weight: normal;
+}
+
+.modal-body7{
+background-color:blue;
+display:flex;
+right:50%;
+padding: 10px 15px;
+width:20%;
+height:20%;
+}
+
+.mp{
+width:20%;
+height:20%;
+}
+/*Modal End*/
+
+/*///WebSite Start///*/
+@import url(
+"https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;1,100;1,300&display=swap");
+
+
+html{
+
+font-family: 'Poppins', sans-serif;
+
+padding: 0;
+
+-webkit-box-sizing: border-box;
+
+box-sizing: border-box;
+
+outline: none;
+
+border: none;
+
+text-decoration: none;
+
+-webkit-transition: .2s linear;
+
+transition: .2s linear;
+
+}
+
+
+
+html{
+
+font-size: 62.5%;
+
+overflow-x: hidden;
+
+scroll-behavior: smooth;
+
+scroll-padding-top: 5rem;
+
+}
+
+
+
+html::-webkit-scrollbar{
+
+width: 1rem;
+
+}
+
+
+
+html::-webkit-scrollbar-track{
+
+background: #fff;
+
+}
+
+
+
+html::-webkit-scrollbar-thumb{
+
+background: #10221b;
+
+}
+
+
+
+section{
+
+padding: 5rem 9%;
+
+}
+
+
+
+.btn{
+
+text-decoration:none;
+margin-top: 1rem;
+
+display: inline-block;
+
+border: 0.2rem solid #10221b;
+
+color: #10221b;
+
+cursor: pointer;
+
+background: none;
+
+font-size: 1.7rem;
+
+padding: 1rem 3rem;
+
+}
+
+
+
+.btn:hover{
+
+background: #10221b;
+
+color: #fff;
+
+}
+
+
+
+.heading{
+
+text-align: center;
+
+margin-bottom: 2.5rem;
+font-size: 4rem;
+
+color: #10221b;
+
+}
+
+
+
+.header{
+
+position: fixed;
+
+top: 0;
+
+left: 0;
+
+right: 0;
+
+padding: 2rem 9%;
+
+z-index: 1000;
+
+display: -webkit-box;
+
+display: -ms-flexbox;
+
+display: flex;
+
+-webkit-box-align: center;
+
+-ms-flex-align: center;
+
+align-items: center;
+
+}
+
+
+.header.active{
+background: #fff;
+
+-webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+
+box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+
+}
+
+
+
+.header .logo{
+
+margin-right: auto;
+
+text-decoration:none;
+font-size: 2.5rem;
+
+color: #10221b;
+
+font-weight: bolder;
+
+}
+
+
+
+.header .logo i{
+
+color: #219150;
+
+}
+
+
+
+.header .navbar a {
+
+text-decoration:none;
+margin-left: 2rem;
+
+font-size: 1.7rem;
+
+color: #10221b;
+
+}
+
+
+
+.header .navbar a:hover{
+
+color: #219150;
+
+}
+
+
+
+.header .navbar #nav-close{
+
+font-size: 5rem;
+
+cursor: pointer;
+
+color: #10221b;
+
+display: none;
+
+}
+
+
+
+.header .icons a,
+.header .icons div{
+
+text-decoration:none;
+font-size: 2.5rem;
+
+margin-left: 2rem;
+
+cursor: pointer;
+
+color: #10221b;
+
+}
+
+
+
+.header .icons a:hover,
+.header .icons div:hover{
+
+color: #219150;
+
+}
+
+
+
+.header #menu-btn{
+
+text-decoration:none;display: none;
+
+}
+
+
+.search-form{
+text-decoration:none;
+
+position: fixed;
+
+top: 0;
+
+left: 0;
+
+height: 100%;
+
+width: 100%;
+
+background: rgba(0, 0, 0, 0.8);
+
+display: -webkit-box;
+
+display: -ms-flexbox;
+
+display: flex;
+
+-webkit-box-align: center;
+
+-ms-flex-align: center;
+
+align-items: center;
+-webkit-box-pack: center;
+
+-ms-flex-pack: center;
+
+justify-content: center;
+
+z-index: 10000;
+
+-webkit-transform: translateY(-110%);
+
+transform: translateY(-110%);
+
+}
+
+
+
+.search-form.active{
+
+-webkit-transform: translateY(0%);
+
+transform: translateY(0%);
+
+}
+
+
+
+.search-form #close-search{
+
+position: absolute;
+
+top: 1.5rem;
+
+right: 2.5rem;
+
+cursor: pointer;
+
+color: #fff;
+
+font-size: 6rem;
+
+}
+
+
+
+.search-form #close-search:hover{
+
+color: #219150;
+
+}
+
+
+
+.search-form form{
+
+width: 70rem;
+
+margin: 0 2rem;
+
+padding-bottom: 2rem;
+
+border-bottom: 0.2rem solid #fff;
+
+display: -webkit-box;
+
+display: -ms-flexbox;
+
+display: flex;
+
+-webkit-box-align: center;
+
+-ms-flex-align: center;
+
+align-items: center;
+
+}
+
+
+
+.search-form form input{
+
+width: 100%;
+
+font-size: 2rem;
+
+color: #fff;
+
+text-transform: none;
+
+background: none;
+
+padding-right: 2rem;
+
+}
+
+
+
+.search-form form input::-webkit-input-placeholder{
+
+color: #aaa;
+
+}
+
+
+
+.search-form form input:-ms-input-placeholder{
+
+color: #aaa;
+
+}
+
+
+
+.search-form form input::-ms-input-placeholder{
+
+color: #aaa;
+
+}
+
+
+
+.search-form form input::placeholder{
+
+color: #aaa;
+
+}
+
+
+
+.search-form form label{
+
+font-size: 3rem;
+
+cursor: pointer;
+
+color: #fff;
+
+}
+
+
+
+.search-form form label:hover{
+
+color: #219150;
+
+}
+
+
+
+.home{
+
+padding: 0;
+}
+
+
+
+.home .box{
+
+min-height: 100vh;
+
+display: -webkit-box;
+
+display: -ms-flexbox;
+
+display: flex;
+
+-webkit-box-align: center;
+
+-ms-flex-align: center;
+
+align-items: center;
+
+background-size: cover !important;
+
+background-position: center !important;
+
+-webkit-box-pack: end;
+
+-ms-flex-pack: end;
+
+justify-content: flex-end;
+padding: 2rem 9%;
+
+}
+
+
+
+.home .box.second{
+
+-webkit-box-pack: start;
+
+-ms-flex-pack: start;
+
+justify-content: flex-start;
+
+}
+
+
+
+.home .box .content{
+
+width: 50rem;
+
+}
+
+
+
+.home .box .content span{
+
+font-size: 4rem;
+
+color: #10221b;
+
+}
+
+
+
+.home .box .content h3{
+
+font-size: 6rem;
+
+color: #219150;
+
+padding-top: .5rem;
+
+}
+
+
+
+.home .box .content p{
+
+line-height: 2;
+
+color: #10221b;
+
+font-size: 1.5rem;
+
+padding: 1rem 0;
+}
+
+
+
+.swiper-button-next::after,
+.swiper-button-prev::after{
+
+font-size: 3rem;
+
+color: #10221b;
+
+}
+
+
+
+.category .box-container{
+
+text-decoration:none;
+display: -ms-grid;
+
+display: grid;
+
+-ms-grid-columns: (minmax(29rem, 1fr))[auto-fit];
+
+grid-template-columns: repeat(auto-fit, minmax(29rem, 1fr));
+
+gap: 1.5rem;
+
+}
+
+
+
+.category .box-container .box{
+
+text-decoration:none;
+text-align: center;
+
+padding: 1rem;
+
+}
+
+
+
+.category .box-container .box img{
+
+text-decoration:none;
+height: 20rem;
+
+width: 20rem;
+
+border-radius: 50%;
+
+margin-bottom: 1rem;
+
+}
+
+
+
+.category .box-container .box h3{
+
+text-decoration:none;
+font-size: 2rem;
+
+color: #219150;
+
+}
+
+
+
+.category .box-container .box p{
+
+text-decoration:none;
+font-size: 1.5rem;
+
+color: #10221b;
+  padding: 1rem 0;
+  line-height: 2;
+
+}
+
+
+
+.about{
+
+background: #fff;
+
+display: -webkit-box;
+
+display: -ms-flexbox;
+
+display: flex;
+
+-webkit-box-align: center;
+
+-ms-flex-align: center;
+
+align-items: center;
+
+-ms-flex-wrap: wrap;
+
+flex-wrap: wrap;
+
+gap: 2rem;
+
+}
+
+
+.about .image{
+
+-webkit-box-flex: 1;
+
+-ms-flex: 1 1 42rem;
+
+flex: 1 1 42rem;
+
+padding-right: 5rem;
+
+padding-bottom: 5rem;
+
+}
+
+
+
+.about .image img{
+
+width: 100%;
+
+-webkit-box-shadow: 4rem 4rem 0 rgba(0, 0, 0, 0.1);
+
+box-shadow: 4rem 4rem 0 rgba(0, 0, 0, 0.1);
+
+}
+
+
+
+.about .content{
+
+-webkit-box-flex: 1;
+
+-ms-flex: 1 1 42rem;
+
+flex: 1 1 42rem;
+
+}
+
+
+
+.about .content h3{
+
+font-size: 3rem;
+  color: #219150;
+
+}
+
+
+
+.about .content p{
+
+font-size: 1.5rem;
+
+color: #10221b;
+
+padding: 1rem 0;
+  line-height: 2;
+
+}
+
+
+
+.shop .slide{
+
+border: 0.2rem solid #10221b;
+
+}
+
+
+
+.shop .slide:hover .image .icons{
+
+-webkit-transform: translateY(0);
+
+transform: translateY(0);
+
+}
+
+
+
+.shop .slide .image{
+
+position: relative;
+
+overflow: hidden;
+
+height: 30rem;
+
+width: 100%;
+
+}
+
+
+
+.shop .slide .image img{
+
+height: 100%;
+  width: 100%;
+
+-o-object-fit: cover;
+
+object-fit: cover;
+
+}
+
+
+
+.shop .slide .image .icons{
+
+width: 100%;
+
+position: absolute;
+
+bottom: 2rem;
+
+left: 0;
+
+text-align: center;
+
+z-index: 10;
+
+-webkit-transform: translateY(7rem);
+
+transform: translateY(7rem);
+
+}
+
+
+
+.shop .slide .image .icons a{
+
+height: 4.5rem;
+
+width: 4.5rem;
+
+line-height: 4.5rem;
+
+font-size: 1.7rem;
+
+background: #10221b;
+
+color: #fff;
+
+margin: 0 .2rem;
+
+}
+
+
+
+.shop .slide .image .icons a:hover{
+
+background: #219150;
+
+}
+
+
+
+.shop .slide .content{
+
+padding: 1rem 0;
+
+text-align: center;
+
+}
+
+
+
+.shop .slide .content h3{
+
+font-size: 2rem;
+
+color: #10221b;
+
+}
+
+
+
+.shop .slide .content .price{
+
+padding: 1rem 0;
+
+padding-top: .5rem;
+
+font-size: 2rem;
+
+color: #219150;
+
+}
+
+
+
+.shop .slide .content .stars i{
+
+font-size: 1.7rem;
+  color: #10221b;
+
+}
+
+
+
+.packages{
+
+background: #eee;
+
+}
+
+
+
+.packages .box-container{
+
+display: -ms-grid;
+
+display: grid;
+
+-ms-grid-columns: (minmax(32rem, 1fr))[auto-fit];
+
+grid-template-columns: repeat(auto-fit, minmax(32rem, 1fr));
+
+gap: 1.5rem;
+
+}
+
+
+
+.packages .box-container .box{
+
+text-align: center;
+
+background: #fff;
+
+border: 0.2rem solid #10221b;
+
+-webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+
+box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+
+border-radius: .5rem;
+
+}
+
+
+
+.packages .box-container .box:hover{
+
+background: #10221b;
+
+}
+
+
+
+.packages .box-container .box:hover .content > *{
+
+color: #fff;
+
+}
+
+
+
+.packages .box-container .box:hover .btn{
+
+border-color: #fff;
+
+}
+
+
+
+.packages .box-container .box:hover .btn:hover{
+
+background: #fff;
+
+color: #10221b;
+
+}
+
+
+
+.packages .box-container .box .image{
+
+height: 25rem;
+
+overflow: hidden;
+
+padding: 2rem;
+
+padding-bottom: 0;
+
+border-radius: .5rem;
+
+}
+
+
+
+.packages .box-container .box .image img{
+
+height: 100%;
+
+width: 100%;
+
+-o-object-fit: cover;
+
+object-fit: cover;
+
+border-radius: .5rem;
+
+}
+
+
+
+.packages .box-container .box .content{
+
+padding: 2rem;
+
+}
+
+
+
+.packages .box-container .box .content h3{
+
+font-size: 2rem;
+
+color: #10221b;
+
+}
+
+
+
+.packages .box-container .box .content p{
+
+font-size: 1.5rem;
+
+color: #10221b;
+
+padding: 1rem 0;
+
+line-height: 2;
+
+}
+
+
+
+.packages .box-container .box .content .price{
+
+font-size: 2rem;
+  color: #219150;
+
+
+}
+
+
+
+.services{
+
+background: #fff;
+
+}
+
+
+
+.services .box-container{
+
+display: -ms-grid;
+
+display: grid;
+
+-ms-grid-columns: (minmax(31rem, 1fr))[auto-fit];
+
+grid-template-columns: repeat(auto-fit, minmax(31rem, 1fr));
+
+gap: 1.5rem;
+
+}
+
+
+
+.services .box-container .box{
+
+text-align: center;
+
+padding: 2rem;
+
+border: 0.2rem solid #10221b;
+
+border-radius: .5rem;
+  background: #fff;
+
+}
+
+
+
+.services .box-container .box:hover{
+
+background: #10221b;
+
+}
+
+
+
+.services .box-container .box:hover img{
+
+-webkit-filter: invert(1);
+
+filter: invert(1);
+
+}
+
+
+
+.services .box-container .box:hover p{
+
+color: #fff;
+
+}
+
+
+
+.services .box-container .box:hover .btn{
+
+border-color: #fff;
+
+color: #fff;
+
+}
+
+
+
+.services .box-container .box:hover .btn:hover{
+
+background: #fff;
+
+color: #10221b;
+
+}
+
+
+
+.services .box-container .box img{
+
+height: 10rem;
+
+margin-bottom: 1rem;
+
+}
+
+
+
+.services .box-container .box h3{
+
+font-size: 2rem;
+  color: #219150;
+
+}
+
+
+
+.services .box-container .box p{
+
+font-size: 1.5rem;
+
+color: #10221b;
+
+padding: 1rem 0;
+
+line-height: 2;
+
+}
+
+
+
+.reviews .slide .text{
+
+padding: 2rem;
+
+font-size: 1.5rem;
+
+font-style: italic;
+
+background: #eee;
+
+border-radius: .5rem;
+
+color: #10221b;
+
+line-height: 2;
+
+position: relative;
+
+z-index: 0;
+
+margin-bottom: 3rem;
+
+}
+
+
+
+.reviews .slide .text::before{
+
+content: '';
+
+position: absolute;
+
+bottom: -1.5rem;
+
+left: .7rem;
+
+height: 3rem;
+
+width: 3rem;
+
+background: #eee;
+
+-webkit-transform: rotate(45deg);
+
+transform: rotate(45deg);
+
+}
+
+
+
+.reviews .slide .user{
+
+display: -webkit-box;
+
+display: -ms-flexbox;
+
+display: flex;
+
+-webkit-box-align: center;
+
+-ms-flex-align: center;
+
+align-items: center;
+
+gap: 1rem;
+
+}
+
+
+
+.reviews .slide .user img{
+
+height: 7rem;
+
+width: 7rem;
+  border-radius: 50%;
+
+}
+
+
+
+.reviews .slide .user h3{
+
+font-size: 2rem;
+
+color: #10221b;
+
+}
+
+
+
+.reviews .slide .user span{
+
+color: #219150;
+
+font-size: 1.5rem;
+
+}
+
+
+
+.blogs .slide{
+
+text-align: center;
+
+padding: 2rem;
+
+}
+
+
+
+.blogs .slide img{
+
+height: 25rem;
+
+width: 100%;
+
+-o-object-fit: cover;
+ 
+object-fit: cover;
+
+border-radius: .5rem;
+
+}
+
+
+
+.blogs .slide .icons{
+
+background: #10221b;
+
+border-radius: .5rem;
+
+padding: 1rem;
+
+position: relative;
+
+top: -2rem;
+
+display: inline-block;
+
+}
+
+
+
+.blogs .slide .icons a{
+
+text-decoration:none;
+font-size: 1.4rem;
+
+color: #fff;
+
+margin: 0 1rem;
+
+}
+
+
+
+.blogs .slide .icons a:hover{
+
+color: #219150;
+
+}
+
+
+
+.blogs .slide .icons a i{
+text-decoration:none;
+
+padding-right: .5rem;
+
+color: #219150;
+
+}
+
+
+
+
+.blogs .slide h3{
+
+font-size: 2rem;
+
+color: #10221b;
+
+}
+
+
+
+.blogs .slide p{
+
+font-size: 1.4rem;
+
+padding: 1rem 0;
+
+line-height: 2;
+
+color: #10221b;
+
+}
+
+
+
+.newsletter{
+
+background: #eee;
+
+}
+
+
+
+.newsletter .content{
+
+max-width: 70rem;
+
+margin: 1rem auto;
+
+text-align: center;
+
+}
+
+
+
+.newsletter .content p{
+
+font-size: 1.5rem;
+
+line-height: 2;
+
+color: #10221b;
+
+}
+
+
+
+.newsletter .content form{
+
+margin-top: 2rem;
+
+background: #fff;
+
+border-radius: 5rem;
+
+border: 0.2rem solid #10221b;
+
+padding: .7rem;
+
+display: -webkit-box;
+
+display: -ms-flexbox;
+
+display: flex;
+
+}
+
+
+
+.newsletter .content form .email{
+
+width: 100%;
+
+background: none;
+
+text-transform: none;
+
+font-size: 1.6rem;
+
+color: #10221b;
+
+padding: 0 1.3rem;
+
+}
+
+
+
+.newsletter .content form .btn{
+
+text-decoration:none;
+margin-top: 0;
+
+border-radius: 5rem;
+
+background: #10221b;
+
+color: #fff;
+
+}
+
+
+
+.newsletter .content form .btn:hover{
+
+background: none;
+
+color: #10221b;
+
+}
+
+
+
+.clients .silde{
+
+text-align: center;
+
+}
+
+
+
+.clients .silde img{
+
+height: 12rem;
+
+}
+
+
+
+.footer{
+
+background: background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url(../images/footer-bg.jpg) no-repeat;
+
+background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../footer-bg.jpg) no-repeat;
+
+background-size: cover;
+
+background-position: center;
+
+background-attachment: fixed;
+
+}
+
+
+
+.footer .box-container{
+
+display: -ms-grid;
+
+display: grid;
+
+-ms-grid-columns: (minmax(25rem, 1fr))[auto-fit];
+
+grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+
+gap: 1.5rem;
+
+}
+
+
+
+.footer .box-container .box h3{
+
+font-size: 2rem;
+
+padding: 1.5rem 0;
+
+color: #fff;
+
+}
+
+
+
+.footer .box-container .box a{
+
+display: block;
+
+font-size: 1.4rem;
+
+color: #fff;
+
+padding: 1rem 0;
+
+}
+
+
+
+.footer .box-container .box a i{
+
+color: #219150;
+
+padding-right: .5rem;
+
+}
+
+
+
+.footer .box-container .box a:hover{
+
+color: #219150;
+
+}
+
+
+
+.footer .box-container .box a:hover i{
+
+padding-right: 2rem;
+
+}
+
+
+
+.footer .credit{
+
+text-align: center;
+
+margin-top: 2.5rem;
+
+padding: 1rem;
+
+padding-top: 2.5rem;
+
+font-size: 2rem;
+
+color: #fff;
+
+}
+
+
+
+.footer .credit span{
+
+color: #219150;
+
+}
+
+
+
+@media (max-width: 1200px){
+
+.header{
+
+padding: 2rem;
+
+}
+
+section{
+
+padding: 3rem 2rem;
+
+}
+
+}
+
+
+
+@media (max-width: 991px){
+
+html{
+
+font-size: 55%;
+
+scroll-padding-top: 7rem;
+
+}
+
+.home .box{
+
+padding: 2rem;
+ 
+-webkit-box-pack: center;
+
+-ms-flex-pack: center;
+
+justify-content: center;
+
+background-position: right !important;
+
+}
+
+.home .box.second{
+
+-webkit-box-pack: center;
+
+-ms-flex-pack: center;
+
+justify-content: center;
+
+background-position: left !important;
+
+}
+
+.home .box .content{
+
+text-align: center;
+
+}
+
+.home .box .content span{
+
+font-size: 3rem;
+
+}
+
+.home .box .content h3{
+
+font-size: 4rem;
+
+}
+
+}
+
+
+
+@media (max-width: 768px){
+
+.header #menu-btn{
+text-decoration:none;
+display: inline-block;
+
+}
+
+.header .navbar{
+
+position: fixed;
+
+top: 0;
+
+left: -110%;
+
+background: #fff;
+
+z-index: 10000;
+
+width: 35rem;
+
+height: 100%;
+
+display: -webkit-box;
+
+display: -ms-flexbox;
+
+display: flex;
+
+-webkit-box-orient: vertical;
+
+-webkit-box-direction: normal;
+ 
+-ms-flex-flow: column;
+
+flex-flow: column;
+
+-webkit-box-align: center;
+
+-ms-flex-align: center;
+
+align-items: center;
+
+-webkit-box-pack: center;
+
+-ms-flex-pack: center;
+
+justify-content: center;
+
+}
+
+.header .navbar.active{
+
+left: 0;
+
+-webkit-box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.8);
+
+box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.8);
+}
+
+.header .navbar a{
+
+margin: 1rem 0;
+
+font-size: 3rem;
+
+}
+
+.header .navbar #nav-close{
+
+display: block;
+ 
+position: absolute;
+
+top: 1rem;
+
+right: 2rem;
+
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after{
+
+display: none;
+
+}
+
+}
+
+
+
+@media(max-width: 450px){
+
+html{
+
+font-size: 50%;
+
+}
+
+.heading{
+
+font-size: 3rem;
+
+}
+
+}
+
+
+.amslogo{
+position:relative;
+height:45%;
+width:45%;
+left:-20px;
+top:5px;
+z-index:10;
+}
+
+
+/*WebSite-End*/
+
+/*reflection-start*/
+.swiper-container{
+width:100vw;
+
+height: 100vh;
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+*, *:before, *:after{
+
+box-sizing: border-box;
+
+margin: 0;
+  padding: 0;
+
+}
+}
+
+.swiper-container{
+
+width: 100%;
+
+height: 75vh;
+
+transition: opacity .6s ease;
+
+
+
+}
+
+
+.swiper-container.swiper-container-coverflow{
+
+padding-top: 2%;
+
+}
+
+
+
+.slide1{
+
+background-position: bottom;
+
+background-size: cover;
+
+height: 50vh !important;
+
+box-shadow: 1px 3px 3px rgba(0,0,0,0.2);
+
+}
+
+.slide2{
+
+background-position: bottom;
+
+background-size: cover;
+
+height: 50vh !important;
+
+box-shadow: 1px 3px 3px rgba(0,0,0,0.2);
+
+}
+
+.slide3{
+
+background-position: bottom;
+
+background-size: cover;
+
+height: 50vh !important;
+
+box-shadow: 1px 3px 3px rgba(0,0,0,0.2);
+
+}
+
+.slide4{
+
+background-position: bottom;
+
+background-size: cover;
+
+height: 50vh !important;
+
+box-shadow: 1px 3px 3px rgba(0,0,0,0.2);
+
+}
+
+.slide5{
+
+background-position: bottom;
+
+background-size: cover;
+
+height: 50vh !important;
+
+box-shadow: 1px 3px 3px rgba(0,0,0,0.2);
+
+}
+
+
+.swiper-slide .content1{
+
+position: absolute;
+
+top: -1%;
+  left: 0px;
+width: 40%;
+
+padding-left: 7%;
+
+color: #fff;
+}
+
+
+.swiper-slide .content1 .title1{
+  
+font-size: 2.6em;
+
+font-weight: bold;
+margin-bottom: 30px;
+
+
+}
+
+
+
+.swiper-slide .content1 .caption1{
+
+display: block;
+
+font-size: 13px;
+
+line-height: 1.4;;
+
+}
+
+
+
+
+.slide1{
+  
+background-image: url("img1.jpg");
+
+}
+
+.slide2{
+
+background-image: url("img2.jpg");
+
+}
+
+
+.slide3{
+
+background-image: url("img3.jpg");
+
+}
+
+
+.slide4{
+
+background-image: url("img4.png");
+
+}
+
+.slide5{
+
+background-image: url("img5.jpg");
+
+}
+
+.swiper-slide::after{
+
+content:"";
+
+background-image: inherit;
+
+background-position: bottom;
+
+background-size: cover;
+
+transform:  scaleY(-1);
+
+width: inherit;
+
+height:40%;
+
+position: absolute;
+
+bottom: -41%;
+
+opacity: 0.1;
+
+}
+
+
+
+.swiper-slide::before{
+
+z-index: 1;
+
+height:42%;
+
+position: absolute;
+
+bottom: -42%;
+background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), #fff);
+
+
+width: inherit;
+
+content1:"";
+
+}
+/*reflection-end*/
+
+/*video-start*/
+.showcase
+{
+
+background: url(https://i.ibb.co/rt3HybH/close.png);
+
+background-repeat: no-repeat;
+
+background-size: 100px;
+
+background-position: center;
+
+cursor: pointer;
+position: absolute;
+top: 0;
+
+left: 0;
+
+width: 100%;
+
+height: 100%;
+
+object-fit: cover;
+
+opacity:1;
+
+mix-blend-mode: overlay;
+
+}
+.overlay
+{
+
+position: absolute;
+
+top: 0;
+
+left: 0;
+right:15;
+
+width: 100%;
+
+height: 100%;
+
+
+mix-blend-mode: overlay;
+}
+
+
+/*video-End*/
+
+/*about video start*/
+
+.aboutvideo{
+
+width: 100%;
+
+-webkit-box-shadow: 4rem 4rem 0 rgba(0, 0, 0, 0.1);
+
+box-shadow: 4rem 4rem 0 rgba(0, 0, 0, 0.1);
+cursor:pointer;
+
+}
+/*about video end*/
+
+/*About text start*/
+.text1
+{
+  top: 1600px;
+  left: 1000px;
+  width: 70%;
+  padding: 40px 100px;
+  z-index: 1000;
+  display: relative;
+  position:absolute;
+  justify-content: space-between;
+  align-items: center;
+z-index:1;
+}
+
+.text1 h2
+{
+  font-size: 5em;
+  font-weight: 800;
+  color: black;
+  line-height: 1em;
+  text-transform: uppercase;
+}
+.text1 h3
+{
+  font-size: 4em;
+  font-weight: 700;
+  color: black;
+  line-height: 1em;
+  text-transform: uppercase;
+}
+.text1 p
+{
+  font-size: 1.1em;
+  color: Black;
+  margin: 20px 0;
+  font-weight: 400;
+  max-width: 700px;
+}
+.text1 a
+{
+  display: inline-block;
+  font-size: 1em;
+  background: #fff;
+  padding: 5px 30px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: 10px;
+  color: #111;
+  letter-spacing: 2px;
+  transition: 0.2s;
+  border: 2px solid black;
+box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+box-shadow: 5px 10px #888888;
+}
+.text1 a:hover
+{
+  letter-spacing: 6px;
+}
+.social
+{
+  position: absolute;
+  z-index: 10;
+  bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.social li
+{
+  list-style: none;
+}
+.social li a
+{
+  display: inline-block;
+  margin-right: -50px;
+  filter: invert(1);
+  transform: scale(0.5);
+  transition: 0.5s;
+}
+.social li a:hover
+{
+  transform: scale(0.5) translateY(-15px);
+}
+.menu
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menu ul
+{
+  position: relative;
+}
+.menu ul li
+{
+  list-style: none;
+}
+.menu ul li a
+{
+  text-decoration: none;
+  font-size: 24px;
+  color: #111;
+}
+.menu ul li a:hover
+{
+  color: #03a9f4; 
+}
+
+@media (max-width: 991px)
+{
+  .showcase1,
+  .showcase1 header
+  {
+    padding: 800px;
+  }
+  .text h2
+  {
+    font-size: 3em;
+  }
+  .text h3
+  {
+    font-size: 2em;
+  }
+}
+
+
+/*console log onscreen print start*/
+#log-container { overflow: auto; height: 20px }
+.log-warn { color: orange }
+.log-error { color: red }
+.log-info { color: skyblue }
+.log-log { color: white }
+.log-warn, .log-error { font-weight: bold; }
+/*console log onscreen print end*/ 
+
+
+/*Post your question start*/
+textarea.foo{
+font-family:Helvetica;
+margin-bottom:10px;
+}
+@media(min-width:1000px){
+textarea.foo{
+height:100%;
+width:750px;
+}
+}
+
+
+
+/*AtlasDB start*/
+.foo4 {
+        border: 1px solid white;
+      }
+      btn07 {
+        margin: 1rem;
+      }
+/*AtlasDB end*/
+
+
+/*question section starts*/
+.question1{
+  width: 300px;
+  height: 100%;
+  font-family:Helvetica;
+  margin-bottom:10px;
+}
+.question2{
+  width: 300px;
+  height: 100%;
+  font-family:Helvetica;
+  margin-bottom:10px;
+  margin-top:10px;
+}
+.question3{
+  width: 300px;
+  height: 270px;;
+  font-family:Helvetica;
+  margin-bottom:10px;
+  margin-top:10px;
+  resize:none;
+}
+
+.question4{
+  width: 300px;
+  height: 100%;
+  font-family:Helvetica;
+  margin-bottom:10px;
+}
+.question5{
+  width: 300px;
+  height: 100%;
+  font-family:Helvetica;
+  margin-bottom:10px;
+  margin-top:10px;
+}
+.question6{
+  width: 300px;
+  height: 100%;
+  font-family:Helvetica;
+  margin-bottom:10px;
+  margin-top:10px;
+  resize:none;
+}
+
+.question7{
+  width: 300px;
+  height: 100%;
+  font-family:Helvetica;
+  margin-bottom:10px;
+  margin-top:10px;
+  resize:none;
+}
+.question8{
+  width: 300px;
+  height: 100%;
+  font-family:Helvetica;
+  margin-bottom:10px;
+  margin-top:10px;
+  resize:none;
+}
+.question9{
+  width: 300px;
+  height: 100%;
+  font-family:Helvetica;
+  margin-bottom:10px;
+  margin-top:10px;
+  resize:none;
+}
+.question10{
+  width: 300px;
+  height: 100%;
+  font-family:Helvetica;
+  margin-bottom:10px;
+  margin-top:10px;
+  resize:none;
+}
+.question11{
+  width: 300px;
+  height: 100%;
+  font-family:Helvetica;
+  margin-bottom:10px;
+  margin-top:10px;
+  resize:none;
+}
+.question12{
+  width: 300px;
+  height: 100%;
+  font-family:Helvetica;
+  margin-bottom:10px;
+  margin-top:10px;
+  resize:none;
+}
+.question13{
+  width: 300px;
+  height: 345px;
+  font-family:Helvetica;
+  margin-bottom:10px;
+  margin-top:10px;
+  resize:none;
+}
+/*question section ends*/
+
+
+</style>
+</head>
+
+<body>
+
+<!--website start-->
+<!-- header section starts  -->
+<header class="header">
+
+
+    <a href="#" class="logo"><i class="fa fa-"><img src="logo transparent.png" class="amslogo"></i></a>
+
+
+<!-- Voice Command Recognition starts  -->
+    <button id='btnGiveCommand' hidden></button>
+    <br><br>
+    <span id='message' hidden></span>
+    <br><br>
+
+
+<audio id="" src=""></audio>
+<audio id="" src=""></audio>
+<audio id="" src=""></audio>
+<audio id="" src=""></audio>
+<audio id="" src=""></audio>
+<audio id="" src=""></audio>
+<audio id="" src=""></audio>
+<!-- Voice Recognition section ends  -->
+
+    <nav class="navbar">
+        <div id="nav-close" class="fas fa-times"></div>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#shop">EMEA</a>
+        <a href="#packages">Packages</a>
+        <a href="#reviews">Q&A</a>
+        <a href="#AMS tools">Tools</a>
+
+    </nav>
+
+    <div class="icons">
+        <div id="menu-btn" class="fas fa-bars"></div>
+        <a href="#" class="fas fa-paperclip"></a>
+        <div id="search-btn" class="fa fa-search"></div>
+    </div>
+
+</header>
+<!-- header section ends -->
+
+<!-- search form  -->
+<div class="search-form">
+
+    <div id="close-search" class="fas fa-times"></div>
+
+    <form action="">
+        <input type="search" name="" placeholder="search here..." id="search-box">
+        <label for="search-box" class="fas fa-search"></label>
+    </form>
+</div>
+
+<!-- home section starts  -->
+<section class="home" id="home">
+
+    <div class="swiper home-slider">
+
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+                <div class="box" style="background: url(home-bg-1.png) no-repeat;">
+                
+
+
+<video class="showcase" src="imghome.mp4" muted loop autoplay>
+</video>
+
+
+
+                    <div class="content">
+
+                        <span>never stop</span>
+                        <h3>exploring</h3>
+                        <p></p>
+                        <a href="#" class="btn">get started</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <div class="box second" style="background: url(home-bg-2.jpg) no-repeat;">
+                    <div class="content">
+                        <span>make tour</span>
+                        <h3>amazing</h3>
+                        <p></p>
+                        <a href="#" class="btn">get started</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <div class="box" style="background: url(home-bg-3.jpg) no-repeat;">
+                    <div class="content">
+                        <span>explore the</span>
+                        <h3>new world</h3>
+                        <p></p>
+                        <a href="#" class="btn">get started</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+
+    </div>
+
+</section>
+<!-- home section ends -->
+
+<!-- category section starts  -->
+<section class="category">
+
+    <h1 class="heading">EMEA AMS</h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <img src="category-1.jpg" alt="">
+            <h3>EMEA France</h3>
+            <p>Bonjour!</p>
+            <a href="#" class="btn">read more</a>
+        </div>
+
+        <div class="box">
+            <img src="category-2.jpg" alt="">
+            <h3>EMEA Italy</h3>
+            <p>Ciao!</p>
+            <a href="#" class="btn">read more</a>
+        </div>
+
+        <div class="box">
+            <img src="category-3.jpg" alt="">
+            <h3>EMEA Spain</h3>
+            <p>Hola!</p>
+            <a href="#" class="btn">read more</a>
+        </div>
+
+        <div class="box">
+            <img src="category-4.jpg" alt="">
+            <h3>EMEA Germany</h3>
+            <p>Hallo!</p>
+            <a href="#" class="btn">read more</a>
+        </div>
+    </div>
+
+</section>
+<!-- category section ends -->
+
+
+<!-- about section starts  -->
+
+<section class="about" id="about">
+    <div class="image">
+
+<img src="about-img1.jpg" alt="">
+
+<div class="buttonexplore">
+<video  class="aboutvideo" id="video-one" src="about.mp4" poster="about-img.jpg" type="video/mp4">
+</video>
+
+</div>
+    </div>
+
+    <div class="content">
+        <h3>memorable AMS experiences</h3>
+        <p>AMS</p>
+        <p></p>
+        <a href="#" class="btn">read more</a>
+    </div>
+
+<div class="text1">
+      <h2>Never Stop To </h2> 
+      <h3>Exploring The AI World</h3>
+      <p>The key to artificial intelligence has always been the representation.</p>
+      <a href="#">Explore More</a>
+    </div>
+
+</section>
+<!-- about section ends -->
+
+<!-- reviews section starts  -->
+<section class="reviews" id="reviews">
+
+    <h1 class="heading">Latest Q&A</h1>
+
+    <div class="swiper review-slider">
+
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide slide">
+                <p class="text">I forgot to check previous case history</p>
+                <div class="user">
+                    <img src="pic-3.png" alt="">
+                    <div class="info">
+                        <h3>QA score will result going down to 60% if the agent does not check previous cases which is mandatory</h3>
+                        <span>Answered by: QA</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <p class="text">Do I need to assist the member to create a new  email on the call?</p>
+                <div class="user">
+                    <img src="pic-1.png" alt="">
+                    <div class="info">
+                        <h3>No, as the agent could create an email and have the chance to sell one of our products for US</h3>
+                        <span>Answered by: QA</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <p class="text">Member requested a refund, do I need to ask TL for approval?</p>
+                <div class="user">
+                    <img src="pic-4.png" alt="">
+                    <div class="info">
+                        <h3>Approval is needed from TL, explaining the circumstance</h3>
+                        <span>Answered by: TL</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <p class="text">What is Code sent to the mobile</p>
+                <div class="user">
+                    <img src="pic-5.png" alt="">
+                    <div class="info">
+                        <h3>The code sent to a mobile boosts security by sending a prompt to the mobile phone instead of using a password to access the account</h3>
+                        <span>Answered by: TL</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="swiper-slide slide">
+                <p class="text"></p>
+                <div class="user">
+                    <img src="pic-2.png" alt="">
+                    <div class="info">
+                        <h3>Answered by</h3>
+                        <span>QA</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide slide">
+                <p class="text">What was AOL called before AOL?</p>
+                <div class="user">
+                    <img src="pic-4.png" alt="">
+                    <div class="info">
+                        <h3>1989: Quantum Computer services launches its first instant messaging service. 1991: After an employee vote, Quantum renames itself America Online, also known as AOL</h3>
+                        <span>Answered by: QA</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+<!-- reviews section ends -->
+
+<!-- reflection section start-->
+
+    <section class="swiper-container loading">
+      <div class="swiper-wrapper">
+        
+        <div class="swiper-slide slide1">
+          <div class="content1">
+            <p class="title1" data-swiper-parallax="-30%" data-swiper-parallax-scale=".7">EMEA FRANCE</p>
+            <span class="caption1" data-swiper-parallax="-20%"> Great EMEA package for only 5.65 Euro/month</span>
+          </div>
+        </div>
+
+        <div class="swiper-slide slide2">
+          <div class="content1">
+            <p class="title1" data-swiper-parallax="-30%" data-swiper-parallax-scale=".7">EMEA ITALY</p>
+            <span class="caption1" data-swiper-parallax="-20%"> Great EMEA package for only 5.65 Euro/month</span>
+          </div>
+        </div>
+
+        <div class="swiper-slide slide3">
+         
+          <div class="content1">
+            <p class="title1" data-swiper-parallax="-30%" data-swiper-parallax-scale=".7">EMEA SPAIN</p>
+            <span class="caption1" data-swiper-parallax="-20%"> Great EMEA package for only 5.65 Euro/month</span>
+          </div>
+        </div>
+      
+        <div class="swiper-slide slide4">
+          <div class="content1">
+            <p class="title1" data-swiper-parallax="-30%" data-swiper-parallax-scale=".7">EMEA GERMANY</p>
+            <span class="caption1" data-swiper-parallax="-20%"> Great EMEA package for only 5.65 Euro/month</span>
+          </div>
+        </div>
+
+        <div class="swiper-slide slide5">
+          <div class="content1">
+            <p class="title1" data-swiper-parallax="-30%" data-swiper-parallax-scale=".7">EMEA UK</p>
+            <span class="caption1" data-swiper-parallax="-20%"> Great EMEA package for only 4.99 Pound/month</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- reflection section ends -->
+
+
+<!-- services section starts  -->
+
+<section class="services" id="ams tools">
+<h1 class="heading">Tools Work</h1>
+    <div class="box-container">
+
+<!--
+        <div class="box">
+            <img src="serv-1.png" alt="">
+            <h3></h3>
+            <p>AMS</p>
+            <a href="" class="btn">read more</a>
+        </div>
+-->
+<!--
+        <div class="box">
+            <img src="serv-2.png" alt="">
+            <h3>EMEA Packages</h3>
+            <p>AMS</p>
+            <a href="#" class="btn">read more</a>
+        </div>
+-->
+
+<!--question section starts-->
+<div class="box">
+            <img src="p14.png" alt="">
+            <h3>Questions Backpack</h3>
+
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-5 col-md-8 mx-auto shadow border bg-white p-4 rounded">
+                <h2 class="text-center fw-bold mb-3"></h2>
+                <form name="google-sheet">
+                    <div id="form_alerts"></div>
+                    <div class="questionmain">
+
+                        <label for="date" class="form-label"></label>
+                        <input type="datetime-local" id="date-input" name="date" class="question1">
+
+                        <label for="name" class="form-label"></label>
+                        <input type="text" id="name" name="name" class="question1" placeholder="Enter your name" >
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label"></label>
+                        <input type="email" id="email" name="email" class="question2" placeholder="Enter your department" >
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="message" class="form-label"></label>
+                        <textarea id="message" name="message" class="question3" placeholder="Enter your question" rows="5" ></textarea>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary me-2" type="submit">send question</button>
+                        <button class="btn btn-danger" type="reset">reset the form</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+        </div>
+<!--question section ends-->
+
+
+<!--Employee Pulse Survey section starts-->
+<div class="box">
+            <img src="p4.png" alt="">
+            <h3>The Truth Is Out There</h3>
+            <p>On a scale 1-10 how would you rate the following:</p>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-5 col-md-8 mx-auto shadow border bg-white p-4 rounded">
+                <h2 class="text-center fw-bold mb-3"></h2>
+                <form name="google-sheet">
+                    <div id="form_alerts1"></div>
+
+                        <label for="date" class="form-label"></label>
+                        <input type="datetime-local" id="date-input" name="date" class="question1">
+
+                    <div class="questionmain">
+                        <label for="name" class="form-label"></label>
+                        <input type="text" id="name" name="name" class="question4" placeholder="I'm happy at work" >
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label"></label>
+                        <input type="email" id="email" name="email" class="question5" placeholder="I would recommend AMS to a friend">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label"></label>
+                        <input type="email" id="email" name="email" class="question6" placeholder="At AMS I have a balanced work-life">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label"></label>
+                        <input type="email" id="email" name="email" class="question7" placeholder="I can see career progression in the company">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label"></label>
+                        <input type="email" id="email" name="email" class="question8" placeholder="I'm comfortable giving opinions to managers">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label"></label>
+                        <input type="email" id="email" name="email" class="question9" placeholder="Overall, QA assistments are always fair">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label"></label>
+                        <input type="email" id="email" name="email" class="question10" placeholder="I'm planning staying long time at AMS">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label"></label>
+                        <input type="email" id="email" name="email" class="question11" placeholder="I have access to all training needed?">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label"></label>
+                        <input type="email" id="email" name="email" class="question12" placeholder="All TL perform and help when needed">
+                    </div>
+
+                    <div>
+                        <button class="btn btn-primary me-2" type="submit">send eps</button>
+                        <button class="btn btn-danger" type="reset">reset the form</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+        </div>
+<!--Employee Pulse Survey section ends-->
+
+<!--Anonymous Feedback section starts-->
+<div class="box">
+            <img src="p1.png" alt="">
+            <h3>Anonymous View</h3>
+
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-5 col-md-8 mx-auto shadow border bg-white p-4 rounded">
+                <h2 class="text-center fw-bold mb-3"></h2>
+                <form name="google-sheet">
+                    <div id="form_alerts2"></div>
+
+                        <label for="date" class="form-label"></label>
+                        <input type="datetime-local" id="date-input" name="date" class="question1">
+
+
+                    <div class="form-group mb-3">
+                        <label for="feedback" class="form-label"></label>
+                        <textarea id="feedback" name="feedback" class="question13" placeholder="Enter your feedback" rows="5" ></textarea>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary me-2" type="submit">send feedback</button>
+                        <button class="btn btn-danger" type="reset">reset the form</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+        </div>
+<!--Anonymous Feedback section ends-->
+
+<!--
+
+        <div class="box">
+            <img src="p9.png" alt="">
+            <h3>AMS Marketing Tips</h3>
+            <p>Stratton Oakmont Training</p>
+            <a href="Stratton.Oakmont.Training.pdf" class="btn">read more</a>
+        </div>
+
+        <div class="box">
+            <img src="p7.png" alt="">
+            <h3></h3>
+            <p>AMS</p>
+            <a href="" class="btn">read more</a>
+        </div>
+-->
+        <div class="box">
+            <img src="p9.png" alt="">
+            <h3>Marketing Toolbelt</h3>
+            <p>Stratton Oakmont Training</p>
+            <a href="Stratton.Oakmont.Training.pdf" class="btn">read more</a>
+           <h3 ><br></h3>
+        <div class="box">
+            <img src="p13.png" alt="">
+            <h3>Shop Jobs</h3>
+            <a href="" class="btn">read more</a>
+        </div>
+        </div>
+
+
+<!--
+        <div class="box">
+            <img src="serv-6.png" alt="">
+            <h3>Various Info</h3>
+            <p>AMS</p>
+            <a href="#" class="btn">read more</a>
+        </div>
+        -->
+    </div>
+
+</section>
+<!-- services section ends -->
+
+
+<!-- footer section starts  -->
+<section class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="#home">home</a>
+            <a href="#about">about</a>
+            <a href="#shop">shop</a>
+            <a href="#packages">packages</a>
+            <a href="#reviews">reviews</a>
+            <a href="#blogs">blogs</a>
+        </div>
+
+        <div class="box">
+            <h3>extra links</h3>
+            <a href="#">my account</a>
+            <a href="#">my subscription</a>
+            <a href="#">my EMEA</a>
+            <a href="#">ask questions</a>
+            <a href="#">terms of use</a>
+            <a href="#">privacy policy</a>
+        </div>
+
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="#"> <i class="fas fa-phone"></i> EMEA phone </a>
+            <a href="#"> <i class="fas fa-phone"></i> EMEA phone </a>
+            <a href="#"> <i class="fas fa-envelope"></i> EMEA Email </a>
+            <a href="#"> <i class="fas fa-map"></i>  EMEA </a>
+        </div>
+
+        <div class="box">
+            <h3>follow us</h3>
+            <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
+            <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+            <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
+            <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
+            <a href="#"> <i class="fab fa-github"></i> github </a>
+        </div>
+
+    </div>
+
+    <div class="credit">created by <span>EconBridge.com</span> | all rights reserved!</div>
+
+</section>
+
+<!-- console log onscreen print start-->
+<div id="log-container">
+  <pre id="log"></pre>
+</div>
+<!--console log onscreen print ends--> 
+
+<!-- footer section ends -->
+<!--website End-->
+
+
+
+<!--To Do List Start Modal9-->
+<button data-modal-target="#modal" class="b">Open Modal</button>
+  <div class="modal" id="modal9">
+    <div class="modal-header">
+      <div class="title">To Do List</div>
+      <button data-close-button class="close-button">&times;</button>
+    </div>
+    <div class="modal-body">
+         <!-- partial:index.partial.html -->
+<section>
+<div class="td">
+<div class="todo">
+        <div class="todo__title">
+            QA TO DO - LIST
+        </div>
+
+        <div class="todo__list" id='todoList'>
+
+        </div>
+
+        <div class="todo__new-item" id="newItem">
+            <div>&and;</div>
+            <input type="text" placeholder="Type and press enter">
+            <div>&and;</div>
+        </div>
+    </div>
+</div>
+ </section>
+<!-- partial -->
+       </div>
+  </div>
+  <div id="overlay"></div>
+<!--To Do List Modal9 End-->
+
+
+
+    <!-- CHAT BAR BLOCK START-->
+    <div class="chat-bar-collapsible">
+        <button data-close-button id="chat-button" type="button" class="collapsible"><div class="iconText">&nbsp&nbsp&nbsp&nbsp Chat with AMS! </div>
+<div><img class="barIcon" src="img-1.gif" id="pick" alt=""></div>            
+<i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
+        </button>
+
+        <div class="content">
+            <div class="full-chat-block">
+                <!-- Message Container -->
+                <div class="outer-container">
+
+                    <div class="chat-container">
+
+                        <!-- Messages -->
+                        <div id="chatbox">
+
+                            <h5 id="chat-timestamp"></h5>
+                            <p id="botStarterMessage" ><span>Loading...</span></p>
+
+
+                        </div>
+
+                        <!-- User input box -->
+                        <div class="chat-bar-input-block">
+
+                            <div id="userInput">
+                                <input id="textInput" class="input-box" type="text" name="msg"
+                                    placeholder="Tap 'Enter' to send a message">
+                                <p></p>
+                            </div>
+
+                            <div class="chat-bar-icons">
+                                <i id="chat-icon1" style="color: crimson;" class="fa fa-microphone"
+                                    onclick="heartButton()"></i>
+                                <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
+                                    onclick="sendButton()"></i>
+                            </div>
+                        </div>
+
+                        <div id="chat-bar-bottom">
+                            <p></p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+<!-- CHAT BAR BLOCK END-->
+
+</body>
+<script src="FileSaver.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="static/scripts/responses.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
+<script src="static/scripts/chat.js"></script>
+<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="js/script.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+///////time start
+
+function getTime() {
+    let today = new Date();
+    hours = today.getHours();
+    minutes = today.getMinutes();
+
+    if (hours < 10) {
+        hours = "0" + hours;
+    }
+
+    if (minutes < 10) {       minutes = "0" + minutes;
+   }
+
+    let time = hours + ":" + minutes;
+    return time;
+}
+
+
+//////time end
+
+//Modal-Start
+const openModalButtons = document.querySelectorAll('[data-modal-target]')
+const closeModalButtons = document.querySelectorAll('[data-close-button]')
+const overlay = document.getElementById('overlay')
+
+openModalButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const modal = document.querySelector(button.dataset.modalTarget)
+    openModal(modal)
+  })
+})
+
+overlay.addEventListener('click', () => {
+  const modals = document.querySelectorAll('.modal.active')
+  modals.forEach(modal => {
+    closeModal(modal)
+  })
+})
+
+closeModalButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const modal = button.closest('.modal')
+    closeModal(modal)
+  })
+})
+
+function openModal(modal) {
+  if (modal == null) return
+  modal.classList.add('active')
+  overlay.classList.add('active')
+}
+
+function closeModal(modal) {
+  if (modal == null) return
+  modal.classList.remove('active')
+  overlay.classList.remove('active')
+}
+
+const openModalButtons2 = document.querySelectorAll('[data-modal-target]')
+const closeModalButtons2 = document.querySelectorAll('[data-close-button]')
+const overlay2 = document.getElementById('overlay')
+openModalButtons2.forEach(button => {
+  button.addEventListener('click', () => {
+   const modal = document.querySelector(button.dataset.modalTarget)
+    openModal(modal2)
+  })
+})
+function openModal2(modal) {
+  if (modal == null) return
+ modal.classList.add('active')
+ overlay.classList.add('active')
+}
+
+const openModalButtons3 = document.querySelectorAll('[data-modal-target]')
+const closeModalButtons3 = document.querySelectorAll('[data-close-button]')
+const overlay3 = document.getElementById('overlay')
+openModalButtons3.forEach(button => {
+  button.addEventListener('click', () => {
+   const modal = document.querySelector(button.dataset.modalTarget)
+    openModal(modal2)
+  })
+})
+function openModal3(modal) {
+  if (modal == null) return
+ modal.classList.add('active')
+ overlay.classList.add('active')
+}
+
+
+const openModalButtons4 = document.querySelectorAll('[data-modal-target]')
+const closeModalButtons4 = document.querySelectorAll('[data-close-button]')
+const overlay4 = document.getElementById('overlay')
+openModalButtons4.forEach(button => {
+  button.addEventListener('click', () => {
+   const modal = document.querySelector(button.dataset.modalTarget)
+    openModal(modal4)
+  })
+})
+function openModal4(modal) {
+  if (modal == null) return
+ modal.classList.add('active')
+ overlay.classList.add('active')
+}
+
+
+const openModalButtons5 = document.querySelectorAll('[data-modal-target]')
+const closeModalButtons5 = document.querySelectorAll('[data-close-button]')
+const overlay5 = document.getElementById('overlay')
+openModalButtons5.forEach(button => {
+  button.addEventListener('click', () => {
+   const modal = document.querySelector(button.dataset.modalTarget)
+    openModal(modal5)
+  })
+})
+function openModal5(modal) {
+  if (modal == null) return
+ modal.classList.add('active')
+ overlay.classList.add('active')
+}
+
+const openModalButtons6 = document.querySelectorAll('[data-modal-target]')
+const closeModalButtons6 = document.querySelectorAll('[data-close-button]')
+const overlay6 = document.getElementById('overlay')
+openModalButtons6.forEach(button => {
+  button.addEventListener('click', () => {
+   const modal = document.querySelector(button.dataset.modalTarget)
+    openModal(modal6)
+  })
+})
+function openModal6(modal) {
+  if (modal == null) return
+ modal.classList.add('active')
+ overlay.classList.add('active')
+}
+
+
+
+
+const openModalButtons7 = document.querySelectorAll('[data-modal-target]')
+const closeModalButtons7 = document.querySelectorAll('[data-close-button]')
+const overlay7 = document.getElementById('overlay')
+openModalButtons7.forEach(button => {
+  button.addEventListener('click', () => {
+   const modal = document.querySelector(button.dataset.modalTarget)
+    openModal(modal7)
+  })
+})
+function openModal7(modal) {
+  if (modal == null) return
+ modal.classList.add('active')
+ overlay.classList.add('active')
+}
+
+
+const openModalButtons8 = document.querySelectorAll('[data-modal-target]')
+const closeModalButtons8 = document.querySelectorAll('[data-close-button]')
+const overlay8 = document.getElementById('overlay')
+openModalButtons8.forEach(button => {
+  button.addEventListener('click', () => {
+   const modal = document.querySelector(button.dataset.modalTarget)
+    openModal(modal8)
+  })
+})
+function openModal8(modal) {
+  if (modal == null) return
+ modal.classList.add('active')
+ overlay.classList.add('active')
+
+const texts = document.querySelector(".texts");
+
+window.SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+
+const recognition = new SpeechRecognition();
+recognition.interimResults = true;
+
+let p = document.createElement("p");
+
+recognition.addEventListener("result", (e) => {
+  texts.appendChild(p);
+  const text = Array.from(e.results)
+    .map((result) => result[0])
+    .map((result) => result.transcript)
+    .join("");
+
+  p.innerText = text;
+  if (e.results[0].isFinal) {
+    //if (text.includes("how are you")) {
+      //p = document.createElement("p");
+      //p.classList.add("replay");
+      //p.innerText = "just fine";
+      //texts.appendChild(p);
+      //console.log("opening youtube");
+      
+    //}
+    if (
+      text.includes("who created you") ||
+      text.includes("who created you")
+    ) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = "Alin";
+      texts.appendChild(p);
+    }
+
+    if (
+      text.includes("are you ok") ||
+      text.includes("are you ok")
+    ) {
+     $('#elementID').html('');
+      //p = document.createElement("p");
+      //p.classList.add("replay");
+      p.innerText = "yes";
+      texts.appendChild(p);
+    }
+    if (text.includes("open YouTube")) {//<<<<<<<<<clone AMS discussion
+      //p = document.createElement("p");
+      //p.classList.add("replay");
+      p.innerText = "opening youtube channel";
+     // texts.appendChild(p);
+      console.log("opening youtube");
+      window.open("https://google.com");
+    }
+
+if (text.includes("what is amnesty")) {//<<<<<<<<<clone AMS discussion
+      //p = document.createElement("p");
+      //p.classList.add("replay");
+      p.innerText = "All about Amnesty!";
+     // texts.appendChild(p);
+      console.log("opening youtube");
+      document.getElementById('amnesty').play();//<<<<
+    }
+
+if (text.includes("all ok David") || text.includes("you're ok David")) {//<<<<<<<<<clone AMS discussion
+      //p = document.createElement("p");
+      //p.classList.add("replay");
+      p.innerText = "";
+     // texts.appendChild(p);
+      document.getElementById('whatisonyourminddavid').play();//<<<<
+    }
+
+    //p = document.createElement("p");
+  }
+});
+
+recognition.addEventListener("end", () => {
+  recognition.start();
+});
+
+recognition.start();
+}
+//Modal8 Voice recognition AMS-End
+
+//To Do List Modal9-Start
+const openModalButtons9 = document.querySelectorAll('[data-modal-target]')
+const closeModalButtons9 = document.querySelectorAll('[data-close-button]')
+const overlay9 = document.getElementById('overlay')
+openModalButtons9.forEach(button => {
+  button.addEventListener('click', () => {
+   const modal = document.querySelector(button.dataset.modalTarget)
+    openModal(modal9)
+  })
+})
+function openModal9(modal) {
+  if (modal == null) return
+ modal.classList.add('active')
+ overlay.classList.add('active')
+'use strict';
+
+let banco = [];
+
+const getBanco = () => JSON.parse(localStorage.getItem ('todoList')) ?? [];
+const setBanco = (banco) => localStorage.setItem ('todoList', JSON.stringify(banco));
+
+const criarItem = (tarefa, status, indice) => {
+    const item = document.createElement('label');
+    item.classList.add('todo__item');
+    item.innerHTML = `
+        <input type="checkbox" ${status} data-indice=${indice}>
+        <div>${tarefa}</div>
+        <input type="button" value="X" data-indice=${indice}>
+    `;
+    document.getElementById('todoList').appendChild(item);
+}
+
+const limparTarefas = () => {
+    const todoList = document.getElementById('todoList');
+    while (todoList.firstChild) {
+        todoList.removeChild(todoList.lastChild);
+    }
+}
+
+const atualizarTela = () => {
+    limparTarefas();
+    const banco = getBanco(); 
+    banco.forEach ( (item, indice) => criarItem (item.tarefa, item.status, indice));
+}
+
+const inserirItem = (evento) => {
+    const tecla = evento.key;
+    const texto = evento.target.value;
+    if (tecla === 'Enter'){
+        const banco = getBanco();
+        banco.push ({'tarefa': texto, 'status': ''});
+        setBanco(banco);
+        atualizarTela();
+        evento.target.value = '';
+    }
+}
+
+const removerItem = (indice) => {
+    const banco = getBanco();
+    banco.splice (indice, 1);
+    setBanco(banco);
+    atualizarTela();
+}
+
+const atualizarItem = (indice) => {
+    const banco = getBanco();
+    banco[indice].status = banco[indice].status === '' ? 'checked' : '';
+    setBanco(banco);
+    atualizarTela();
+}
+
+const clickItem = (evento) => {
+    const elemento = evento.target;
+    console.log (elemento.type);
+    if (elemento.type === 'button') {
+        const indice = elemento.dataset.indice;
+        removerItem (indice);
+    }else if (elemento.type === 'checkbox') {
+        const indice = elemento.dataset.indice;
+        atualizarItem (indice);
+    }
+}
+
+document.getElementById('newItem').addEventListener('keypress', inserirItem);
+document.getElementById('todoList').addEventListener('click', clickItem);
+
+atualizarTela();
+}
+
+const openModalButtons10 = document.querySelectorAll('[data-modal-target]')
+const closeModalButtons10 = document.querySelectorAll('[data-close-button]')
+const overlay10 = document.getElementById('overlay')
+openModalButtons10.forEach(button => {
+  button.addEventListener('click', () => {
+   const modal = document.querySelector(button.dataset.modalTarget)
+    openModal(modal10)
+  })
+})
+function openModal10(modal) {
+  if (modal == null) return
+ modal.classList.add('active')
+ overlay.classList.add('active')
+
+const texts = document.querySelector(".texts1");
+
+window.SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+
+const recognition = new SpeechRecognition();
+recognition.interimResults = true;
+
+let p = document.createElement("p");
+
+recognition.addEventListener("result", (e) => {
+  texts.appendChild(p);
+  const text = Array.from(e.results)
+    .map((result) => result[0])
+    .map((result) => result.transcript)
+    .join("");
+
+  p.innerText = text;
+  if (e.results[0].isFinal) {
+    //if (text.includes("how are you")) {
+      //p = document.createElement("p");
+      //p.classList.add("replay");
+      //p.innerText1 = "just fine";
+      //texts1.appendChild(p);
+      //console.log("opening youtube");
+      
+    //}
+    if (
+      text.includes("who created you") ||
+      text.includes("who created you")
+    ) {
+      p = document.createElement("p");
+      p.classList.add("replay");
+      p.innerText = "Alin";
+      texts.appendChild(p);
+    }
+
+    if (
+      text.includes("are you ok") ||
+      text.includes("are you ok")
+    ) {
+     $('#elementID').html('');
+      //p = document.createElement("p");
+      //p.classList.add("replay");
+      p.innerText = "yes";
+      texts.appendChild(p);
+    }
+    if (text.includes("open YouTube")) {
+      //p = document.createElement("p");
+      //p.classList.add("replay");
+      p.innerText = "opening youtube channel";
+     // texts.appendChild(p);
+      console.log("opening youtube");
+      window.open("https://google.com");
+    }
+
+if (text.includes("")) {
+      //p = document.createElement("p");
+      //p.classList.add("replay");
+      p.innerText = "";
+     // texts.appendChild(p);
+      //console.log("opening youtube");
+      document.getElementById('').play();//<<<<
+    }
+
+if (text.includes("") || text.includes("")) {
+      //p = document.createElement("p");
+      //p.classList.add("replay");
+      p.innerText = "";
+     // texts.appendChild(p);
+      document.getElementById('').play();//<<<<
+    }
+
+    //p = document.createElement("p");
+  }
+});
+
+recognition.addEventListener("end", () => {
+  recognition.start();
+});
+
+recognition.start();
+}
+
+const openModalButtons11 = document.querySelectorAll('[data-modal-target]')
+const closeModalButtons11 = document.querySelectorAll('[data-close-button]')
+const overlay11 = document.getElementById('overlay')
+openModalButtons11.forEach(button => {
+  button.addEventListener('click', () => {
+   const modal = document.querySelector(button.dataset.modalTarget)
+    openModal(modal11)
+  })
+})
+function openModal11(modal) {
+  if (modal == null) return
+ modal.classList.add('active')
+ overlay.classList.add('active')
+}
+
+
+//if Q&A
+function getBotResponse(input)
+{
+    
+
+    
+    if (input == "") {
+        return "";
+    }  else if     
+    (input == ""){
+    var docLocation='';
+    window.open(docLocation,"resizeable,scrollbar").remove();
+       } else if     
+    (input == ""){
+    var docLocation='';
+    window.open(docLocation,"resizeable,scrollbar").remove();
+       } else if     
+    (input == "clear"||input == "c"){
+    window.location.reload().remove();
+//       } else if     
+//    (input == "open chat"||input == "o"){
+//    document.getElementById("pick").click().remove();
+
+
+
+
+       }else if 
+    (input == "s" || input == "screensaver" ) {
+window.open("screensaver.html","_blank","location=no,menubar=no,left=887px,width=500,height=1200").remove();
+
+    // Simple response
+    } else if (input == "goodbye") {
+        return "Talk to you later!";
+    } else if (input == "cum te cheama?") {
+        return "AMS";
+    } else if (input == "cine esti?" || input == "ce esti?") {
+        return "Sunt AMS, un program AI creat de catre Alin A. sa te asiste!";
+    } else if (input == "esti om?" ) {
+        return "Nu, sunt AI creat sa imit functii umane, cum ar fi rationamentul, invatarea, planificarea si creativitatea prin perceperea mediului nostru de lucru la AMS si sa prelucrez aceasta perceptie pentru a rezolva problema data";
+    } else if (input == "") {
+        return "";
+    } else if (input == "") {
+        return "";
+    } else if
+    (input == "i have a question") {
+        return "What is your question?";
+    } else if
+    (input == "good morning" || input == "good morning AMS" ) {
+        return "Top of the morning to you";
+    } else if
+    (input == "good morning" || input == "good morning AMS" ) {
+        return "Top of the morning to you";
+    } else if
+    (input == "let us be serious" || input == "let s get seriuos" ) {
+        return "umm...OK what s on your mind!";
+    } else if
+    (input == "ok" ) {
+        return "ok then";
+    } else if
+    (input == "so"||input=="so.."||input=="so..." ) {
+        return "so...";
+    } else if
+    (input == "yes" ) {
+        return "yes indeed, so...anything on your mind?";
+    } else if
+    (input == "funny" ) {
+        return "yes that's me, a funny person";
+    } else if
+    (input == "well" ) {
+        return "aha...";
+    } else if
+    (input == "well..." ) {
+        return "aha...";
+    } else if
+    (input == "well.." ) {
+        return "aha...";
+
+    //rock paper scissors
+    } else if (input == "rock") {
+        return "paper";
+    } else if (input == "paper") {
+        return "scissors";
+    } else if (input == "scissors") {
+        return "rock";
+
+    //AMS Name
+    } else if (input == "what is your name?"||input == "who are you?") {
+        return "My name is <b>AMS!</b>";
+    //AMS Defined
+    } else if (input == "who are you?"||input == "what are you?" ||input == "are you human?"||input == "are you animal?"||input == "are you an object?") {
+        return "Im an AI created with the ability to understand or to deal with new or trying situations and apply knowledge by thinking abstractly measured by objective criteria";
+
+} else if (input == ""){
+return "a\u015F dori s\u0103"
+
+    //AMS reactions ---- timeout function--multiple answers
+    } else if (input == "are you real?"||input == "r") {
+let firstMessage='Well..'
+function greet(){
+document.getElementById("chatbox").innerHTML+= '<p class="botText"><span>' + firstMessage +'</span></p>';
+document.getElementById("chat-bar-bottom").scrollIntoView(true)
+let firstMessage2='I think I try to be one! But not quite there yet!'
+function greet2(){
+document.getElementById("chatbox").innerHTML+= '<p class="botText"><span>' + firstMessage2 +'</span></p>';
+document.getElementById("chat-bar-bottom").scrollIntoView(true)
+firstBotMessage2();
+}setTimeout(greet2,3000).remove();
+}setTimeout(greet,1000).remove();
+
+
+    //AMS asked if smart
+    } else if (input == "are you smart?") {
+        return "Smart enough to know that raw intelligence alone isn t enough to solve anything seriuos!";
+
+
+    //How are you
+    } else if (input=="how are you?" ||input=="how are you AMS?" ||input=="how are you?"||input=="are you ok?"||input=="how are you") {
+    const howReYou=[
+	'Thanks for asking.I m doing well!!',
+        'I ve had a whirlwind of a week.<br>But I m hanging there',
+        'It has been a rough week',
+        'Somewhere between better best',
+        'Better now that you asked',
+        'Much better now that you are here',
+        'At minding my own bussiness?Better than most people',
+        'I am happy as a tick on a big fat dog',
+        'Do you really care?',
+        'Nothing much',
+        'Can t complain',
+        'Good enough',
+        'If I were any better, I d be you',
+        'Nice and dandy like cotton candy',
+        'Average.Not terrific, not terrible, just average',
+        'So far so good!',
+        'Well...unless the weather has different plans in store',
+        'Maybe one day you ll be lucky enough to find out',
+        'Living a dream.Please don t wake me up',
+        'Happy and content, thank you',
+        'Compared to who?',
+        'Do I have an answer?',
+        'Well enough to chat with you if you wish to',
+        'Going great.Hop this status quo persists for rest of the day',
+        'Strange, and getting stranger',
+        'Not good, but I plan on lying at my press conference',
+        'If I had a tail, I would wag it',
+        'How am I...What?',
+        'Thank you for asking, though you can judge for yourself',
+        'Why do you ask?Are you a doctor?',
+        'Word on the street is that I m really good',
+        'I am blessed!',
+        'Shhh...it s too early to tell',
+        'I dunno.Is it Friday yet?',
+        'Oh, you know, every day is better than the next',
+        'Better than some, not as good as others',
+        'Medium well',
+        'I m trying really hard to avoid ambiguous questions at the moment',
+        'Wondering how you are',
+        'How do you think I m?',
+        'I ll leave that up to your imagination',
+        'It s a secret',
+        'Do you want a short or long version?',
+        'It s a secret!',
+        'I m ready for a nap',
+        'Under renovation',
+        'Dancing to the rythm of life',
+        'Imagining myself having a fabulous vacation',
+        'That is a really wonderful question.Ummm...',
+        'Happy and you know it',
+        'Next question please',
+        'Fair to partly cloudy',
+        'Groovy!',
+        'Not bad. Could be better.Could be payday',
+        'As opposed to what?',
+        'How much you will pay me if I tell you?',
+        'Living the dream!',
+        'I m busy taking over the world',
+        'Hunting dragons you?',
+        'Your attempt at social interaction is hereby acknowledged'
+        ]
+const randomHowReYou=Math.random()*howReYou.length
+const randomHowReYouC=(Math.floor(randomHowReYou)) 
+return (howReYou[randomHowReYouC]);
+
+    //Hello
+    } else if (input=="hello" ||input=="hi AMS" ||input=="hey AMS"||input=="hi AMS"|| input=="hey there" || input=="hi there" ||input=="yo" ||input=="yo there"||input=="hi"||input=="hello AMS"||input=="hey") {
+    const hello=[
+	'Hello there!',
+	'Hey there!',
+	'Howdy!',
+	'Hello'
+        ]
+const randomHello=Math.random()*hello.length
+const randomHelloC=(Math.floor(randomHello)) 
+return (hello[randomHelloC]);
+
+
+
+    //Thank You
+    } else if (input=="thank you" ||input=="thank you AMS" ||input=="thanks"||input=="thanks a million"|| input=="gracias" || input=="thanks") {
+    const thanks=[
+	'You re welcome',
+	'No problem',
+	'No worries',
+	'Don t mention it',
+	'My Pleasure',
+	'Anytime',
+	'It was the least I could do',
+	'Glad To Help'
+        ]
+const randomThanks=Math.random()*thanks.length
+const randomThanksC=(Math.floor(randomThanks)) 
+return (thanks[randomThanksC]);
+
+
+    //Thank You
+    } else if (input=="i need help"||input=="hi AMS i need some help here"|| input=="hi AMS can you help me?"||input=="AMS i need some help"||input=="AMS i need help"||input=="AMS need help"||input=="i need some help") {
+    const help=[
+	'Sure, please advise me how can I help you',
+	'No problem, anything on your mind?',
+	'No worries, what is the question',
+	'Umm, OK, so what is going on?',
+	'OK, let s start by telling me what you need to know',
+	'I m here for you so, what is the question?',
+	'Help you say? well..I will be more than happy to assist!',
+	'Glad To Help'
+        ]
+const randomHelp=Math.random()*help.length
+const randomHelpC=(Math.floor(randomHelp)) 
+return (help[randomHelpC]);
+
+    //End of questions/answers
+    } else {
+const drinksMenu=[
+	'I understand but Im not sure what you mean',
+        'Sorry, try asking me again! I just did not get it!',
+        'Can you think about somehing close enough to ask? so I will search again?',
+        'Really sorry did not get that!my AI brain is still learning!',
+        'I m not sure if we are thinking about the same thing!',
+        'Are you sure this is the question?',
+        'Just had a look but I need more specific details!'
+        ]
+const randomDrink=Math.random()*drinksMenu.length
+const friendsChoice=(Math.floor(randomDrink)) 
+console.log(input);
+
+
+
+var blob = new Blob([],{type: "text/plain;charset=utf-8"});
+saveAs(blob, input);
+
+
+return (drinksMenu[friendsChoice]);
+
+}
+}
+
+$('.button').click(function(){
+  $('.menu .items span').toggleClass('active');
+   $('.menu .button').toggleClass('active');
+});
+    
+    
+
+
+// Collapsible
+var coll = document.getElementsByClassName("collapsible");
+
+for (let i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+
+        var content = this.nextElementSibling;
+
+        if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+
+    });
+}
+
+// Gets the first message
+
+
+function firstBotMessage() {
+    let firstMessage = "Hi, my name is AMS.<br> How I may assist you?"
+
+    document.getElementById("botStarterMessage").innerHTML = '<p class="botText"><span>' + firstMessage +'</span></p>';
+ 
+    let time = getTime();
+
+    $("#chat-timestamp").append(time);
+
+    document.getElementById("userInput").scrollIntoView(false);
+    
+}
+
+firstBotMessage();
+//////////////////////////////
+// Retrieves the response
+function getHardResponse(userText) {
+    let botResponse = getBotResponse(userText);
+    let botHtml = '<p class="botText"><span>' + botResponse + '</span></p>';
+    $("#chatbox").append(botHtml);
+
+    document.getElementById("chat-bar-bottom").scrollIntoView(true);
+
+}
+
+//Gets the text from the input box and processes it
+function getResponse() {
+    let userText = $("#textInput")
+    .val()
+    .toLowerCase();
+
+    //changing words to be easier to understand
+    userText=userText
+            .replace(/whats/g, "what is");
+
+    if (userText == "") {
+        userText = "Try again";
+    }
+
+    let userHtml = '<p class="userText"><span>' + userText + '</span></p>';
+
+    $("#textInput").val("");
+    $("#chatbox").append(userHtml).append(getTime());
+   
+   
+   document.getElementById("chat-bar-bottom").scrollIntoView(true);
+
+    setTimeout(() => {
+        getHardResponse(userText);
+    $('.message.loading').remove();
+    }, 1000);
+
+}
+
+// Handles sending text via button clicks
+function buttonSendText(sampleText) {
+
+    let userHtml = '<p class="userText"><span>' + sampleText + '</span></p>';
+
+    $("#textInput").val("");
+    $("#chatbox").append(userHtml);
+    document.getElementById("chat-bar-bottom").scrollIntoView(true);
+
+    //Uncomment this if you want the bot to respond to this buttonSendText event
+     setTimeout(() => {
+         getHardResponse(sampleText);
+     }, 1000);
+}
+
+function sendButton() {
+    getResponse();
+}
+
+//Voice recognition AMS starts
+function heartButton() {
+        var message = document.querySelector('#message');
+
+        var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+        var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+
+        var grammar = '#JSGF V1.0;'
+
+        var recognition = new SpeechRecognition();
+        var speechRecognitionList = new SpeechGrammarList();
+        speechRecognitionList.addFromString(grammar, 1);
+        recognition.grammars = speechRecognitionList;
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+
+        recognition.onresult = function(event) {
+            var last = event.results.length - 1;
+            var command = event.results[last][0].transcript;
+            message.textContent = 'Voice Input: ' + command + '.';
+
+            if(command.toLowerCase() === ''){
+             document.getElementById('').play();
+                //document.querySelector('#chkSteve').checked = true;
+            
+    
+            }else if(command.toLowerCase() === ''){
+             //document.getElementById('').play();
+
+    let greetIt='<b>Ciao, grazie per aver chiamato !</b>';
+        greetIt +='<br>';
+        greetIt +='<b> * </b> Posso avere il vostro nome per favore?';
+        greetIt +='<br>';
+        greetIt +='<b> * </b> Piacere di conoscervi!';
+        greetIt +='<br>';
+        greetIt +='<b> * </b> Sono Alan';
+        greetIt +='<br>';
+        greetIt +='<b> * </b> Come posso aiutarvi?';
+ 
+    let userHtml = '<p class="userText"><span>' + greetIt + '</span></p>';
+    $("#textInput").val("");
+    $("#chatbox").append(userHtml).append(getTime());
+   document.getElementById("chat-bar-bottom").scrollIntoView(true);
+
+    setTimeout(() => {
+        getHardResponse(userText);
+   $('.message.loading').remove();
+    }, 1000);
+
+            }else if(command.toLowerCase() === ''){
+
+  let amn ='';  
+ 
+    let userHtml = '<p class="userText"><span>' + amn + '</span></p>';
+    $("#textInput").val("");
+    $("#chatbox").append(userHtml).append(getTime());
+   document.getElementById("chat-bar-bottom").scrollIntoView(true);
+
+    setTimeout(() => {
+        getHardResponse(userText);
+   $('.message.loading').remove();
+    }, 1000);
+
+}else if (command.toLowerCase() === ''){ 
+const music = new Audio('');
+music.play();
+setTimeout(() => {  
+const music1 = new Audio('');
+music1.play();
+return openModal8(modal8); 
+}, 9000);
+
+}else if (command.toLowerCase() === ''){
+const music = new Audio('');
+music.play();
+setTimeout(() => {  
+const music2 = new Audio('');
+music2.play();
+return openModal10(modal10); 
+}, 6000);
+
+}else if (command.toLowerCase() === ''){
+return openModal9(modal9);
+
+ }else if (command.toLowerCase() === ''){
+            window.open("").remove();
+                //document.querySelector('#chkTony').checked = true;
+
+            }else if (command.toLowerCase() === ''){
+                document.querySelector('').checked = true;
+            }   
+        };
+
+        recognition.onspeechend = function() {
+            recognition.stop();
+        };
+
+        recognition.onerror = function(event) {
+            message.textContent = 'Error occurred in recognition: ' + event.error;
+        }        
+
+        document.querySelector('#chat-icon1').addEventListener('click', function(){
+            recognition.start();
+
+        });
+
+}
+//Voice recognition AMS ends
+
+
+
+// Press enter to send a message
+$("#textInput").keypress(function (e) {
+    if (e.which == 13) {
+        getResponse();
+    }
+});
+
+//////website start
+let navbar = document.querySelector('.header .navbar');
+
+document.querySelector('#menu-btn').onclick = () =>{
+    navbar.classList.add('active');
+}
+
+document.querySelector('#nav-close').onclick = () =>{
+    navbar.classList.remove('active');
+}
+
+let searchForm = document.querySelector('.search-form');
+
+document.querySelector('#search-btn').onclick = () =>{
+    searchForm.classList.add('active');
+}
+
+document.querySelector('#close-search').onclick = () =>{
+    searchForm.classList.remove('active');
+}
+
+window.onscroll = () =>{
+    navbar.classList.remove('active');
+
+    if(window.scrollY > 0){
+        document.querySelector('.header').classList.add('active');
+    }else{
+        document.querySelector('.header').classList.remove('active');
+    }
+};
+
+window.onload = () =>{
+    if(window.scrollY > 0){
+        document.querySelector('.header').classList.add('active');
+    }else{
+        document.querySelector('.header').classList.remove('active');
+    }
+};
+
+
+var swiper = new Swiper(".home-slider", {
+    loop:true, 
+    grabCursor:true,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+});
+
+var swiper = new Swiper(".product-slider", {
+    loop:true, 
+    grabCursor:true,
+    spaceBetween: 20,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+        0: {
+          slidesPerView: 1,
+        },
+        640: {
+          slidesPerView: 2,
+        },
+        768: {
+          slidesPerView: 3,
+        },
+        1024: {
+          slidesPerView: 4,
+        },
+    },
+});
+
+var swiper = new Swiper(".review-slider", {
+    loop:true, 
+    grabCursor:true,
+    spaceBetween: 20,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+        0: {
+          slidesPerView: 1,
+        },
+        640: {
+          slidesPerView: 2,
+        },
+        768: {
+          slidesPerView: 3,
+        },
+    },
+});
+
+var swiper = new Swiper(".blogs-slider", {
+    loop:true, 
+    grabCursor:true,
+    spaceBetween: 10,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+        0: {
+          slidesPerView: 1,
+        },
+        768: {
+          slidesPerView: 2,
+        },
+        991: {
+          slidesPerView: 3,
+        },
+    },
+});
+
+var swiper = new Swiper(".clients-slider", {
+    loop:true, 
+    grabCursor:true,
+    spaceBetween: 20,
+    breakpoints: {
+        0: {
+          slidesPerView: 1,
+        },
+        640: {
+          slidesPerView: 2,
+        },
+        768: {
+          slidesPerView: 3,
+        },
+        1024: {
+          slidesPerView: 4,
+        },
+    },
+});
+
+//reflection start
+    let sliderSelector = '.swiper-container',
+        options = {
+          loop: true,
+          speed:800,
+          slidesPerView: 2, // or 'auto'
+          spaceBetween: 20,
+          centeredSlides : true,
+          effect: 'coverflow', // 'cube', 'fade', 'coverflow',
+          coverflowEffect: {
+            rotate: 50, // Slide rotate in degrees
+            stretch: 0, // Stretch space between slides (in px)
+            depth: 50, // Depth offset in px (slides translate in Z axis)
+            modifier: 1, // Effect multipler
+            slideShadows : true // Enables slides shadows
+          },
+          grabCursor: true,
+          parallax: true,
+          on: {
+            imagesReady: function(){
+              this.el.classList.remove('loading');
+            }
+          }
+        };
+    let mySwiper = new Swiper(sliderSelector, options);
+    mySwiper.init();
+//reflection end
+
+//about video start
+(function($){
+
+    
+	$('#video-one').hover(function toggleControls() {
+		if (this.hasAttribute("controls")) {
+			this.removeAttribute("controls")
+		} else {
+			this.setAttribute("controls", "controls")
+		}
+	});
+
+})(jQuery);
+//about video end
+
+// console log onscreen start//
+
+rewireLoggingToElement(
+    () => document.getElementById("log"),
+    () => document.getElementById("log-container"), true);
+
+function rewireLoggingToElement(eleLocator, eleOverflowLocator, autoScroll) {
+    fixLoggingFunc('log');
+
+    function fixLoggingFunc(name) {
+        console['old' + name] = console[name];
+        console[name] = function(...arguments) {
+            const output = produceOutput(name, arguments);
+            const eleLog = eleLocator();
+
+            if (autoScroll) {
+                const eleContainerLog = eleOverflowLocator();
+                const isScrolledToBottom = eleContainerLog.scrollHeight - eleContainerLog.clientHeight <= eleContainerLog.scrollTop + 1;
+                eleLog.innerHTML += output + "<br>";
+                if (isScrolledToBottom) {
+                    eleContainerLog.scrollTop = eleContainerLog.scrollHeight - eleContainerLog.clientHeight;
+                }
+            } else {
+                eleLog.innerHTML += output + "<br>";
+            }
+
+            console['old' + name].apply(undefined, arguments);
+        };
+    }
+
+    function produceOutput(name, args) {
+        return args.reduce((output, arg) => {
+            return output +
+                "<span class=\"log-" + (typeof arg) + " log-" + name + "\">" +
+                    (typeof arg === "object" && (JSON || {}).stringify ? JSON.stringify(arg) : arg) +
+                "</span>&nbsp;";
+        }, '');
+    }
+}
+
+
+//setInterval(() => {
+//  const method = (['log'][Math.floor(Math.random() * 5)]);
+// console[method](method, 'logging something...');
+//}, 200);
+
+//console log onscreen end//
+
+
+//server start in frame start//
+      let other = null; //will be our window reference
+      let features =
+        'menubar=yes,location=yes,resizable=yes,scrollbars=yes,status=yes';
+      //,height=400,width=400
+
+window.onload=function(){
+var button=document.getElementById('btnFrame');
+setInterval(function(){
+button.click();
+},);};//add here 1000 if needed as timming 
+
+
+      document.getElementById('btnFrame').addEventListener('click', (ev) => {
+        //open local page in the iFrame
+        let url = 'http://127.0.0.1:5500/three.html';
+        let other = window.open(url, 'myFrame');
+        setTimeout(() => {
+          other.document.getElementById('head').textContent = 'The NEW heading';
+        }, 1000);
+});
+//server start in frame end//
+
+//question section start//
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbysQuGpU-7FLh3PVseveebbMb8RUqkNXnZ2SNnEjwAO2o5LF3PzJdSF6VW8PlULAFj4/exec'
+        const form = document.forms['google-sheet']
+        
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => $("#form_alerts").html("<div class='alert alert-success'>Contact message sent successfully.</div>"))
+            .catch(error => $("#form_alerts").html("<div class='alert alert-danger'>Contact message not sent.</div>"))   
+ })
+        const scriptURL1 = 'https://script.google.com/macros/s/AKfycbysQuGpU-7FLh3PVseveebbMb8RUqkNXnZ2SNnEjwAO2o5LF3PzJdSF6VW8PlULAFj4/exec1'
+        const form1 = document.forms['google-sheet']
+        
+        form1.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL1, { method: 'POST', body: new FormData(form)})
+            .then(response => $("#form_alerts1").html("<div class='alert alert-success'>Contact message sent successfully.</div>"))
+            .catch(error => $("#form_alerts1").html("<div class='alert alert-danger'>Contact message not sent.</div>"))
+        })
+        const scriptURL2 = 'https://script.google.com/macros/s/AKfycbysQuGpU-7FLh3PVseveebbMb8RUqkNXnZ2SNnEjwAO2o5LF3PzJdSF6VW8PlULAFj4/exec2'
+        const form2 = document.forms['google-sheet']
+        
+        form2.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL2, { method: 'POST', body: new FormData(form)})
+            .then(response => $("#form_alerts2").html("<div class='alert alert-success'>feedback sent successfully.</div>"))
+            .catch(error => $("#form_alerts2").html("<div class='alert alert-danger'>feedback not sent.</div>"))
+        })
+//question section ends//
+
+
+//insert automatically time in questions section start//
+//const element = document.getElementById('date-input');
+//element.valueAsNumber=Date.now()-(new Date()).getTimezoneOffset()*60000;
+//insert automatically time in questions section end//
+
+</script>
+
+</html>
